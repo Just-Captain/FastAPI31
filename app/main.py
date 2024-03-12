@@ -1,30 +1,40 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
+import json
+
 from pydantic import BaseModel
 
 app = FastAPI() # <- Создаем экземпляр класса FastAPI
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/") # <- декоратор, который обрабатывает get - запросы где маршрут
-def index(request: Request):
-    return templates.TemplateResponse(request=request, name='index.html')
+@app.get('/')
+def task_list(request: Request):
+    with open('database.json', 'r', encoding='utf-8') as db:
+        db:dict = json.load(db)
+        print(db)
+        context = db
+    return templates.TemplateResponse(request=request,
+                                    name='task_list.html',
+                                    context=context)
 
-class Item(BaseModel):
-    login: str
-    password: str
 
-@app.post('/')
-def index_post(request:Request, item:Item):
-    print(item)
-    return templates.TemplateResponse(request=request, name='index.html', context=item)
+class Task(BaseModel):
+    title:str
+    description:str
 
-@app.get("/login/") # <- декоратор, который обрабатывает get - запросы где маршрут
-def login(request:Request):
-    return templates.TemplateResponse(request=request, name="login.html") 
+@app.get('/task_create/')
+def task_create(request:Request):
+    return templates.TemplateResponse(request=request, name='task_create.html')
 
-@app.get("/tasks/") # <- декоратор, который обрабатывает get - запросы где маршрут
-def tasks(request:Request):
-    context = {"task": "Купить молоко"}
-    return templates.TemplateResponse(request=request, name="tasks.html", context=context)
+@app.post('/task_create/')
+def task_create(request:Request, task:Task):
+    print(task)
+    return task
+"""
+{"detail":[{"type":"model_attributes_type","loc":["body"],
+"msg":"Input should be a valid dictionary or object to extract fields from",
+"input":"title=sadasd&description=asdsad",
+"url":"https://errors.pydantic.dev/2.6/v/model_attributes_type"}]}
+"""
 
 # uvicorn main:app --reload
