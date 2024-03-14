@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 app = FastAPI() # <- Создаем экземпляр класса FastAPI
 templates = Jinja2Templates(directory="templates")
-
+"comment"
 @app.get('/')
 def task_list(request: Request):
     with open('database.json', 'r', encoding='utf-8') as db:
