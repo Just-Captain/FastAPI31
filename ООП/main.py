@@ -51,9 +51,11 @@ print(user_one.__login)
 """
 
 class Fraction:
+    count = 0
     def __init__(self, numerator, denominator) -> None:
         self.__numerator = numerator
         self.__denominator = denominator
+        Fraction.count += 1
 
     def output_fraction(self):
         return f"{self.__numerator}/{self.__denominator}"
@@ -84,6 +86,9 @@ class Fraction:
         new_denominator = self.__denominator * other_fraction.get_numerator()
         return Fraction(new_numerator, new_denominator)
 
+    def __del__(self):
+        print(f'удалился обьект {self.__str__(ls)}')
+        Fraction.count -= 1
 frac_one = Fraction(1, 2)
 frac_two = Fraction(3, 4)
 result = frac_one.sum(frac_two)
@@ -93,3 +98,19 @@ print(type(x))
 print(type(frac_two))
 x = str(x)
 print(type(x))
+
+print(frac_one.count, 'значение count')
+class MyClass:
+    count = 0
+
+    def add(self):
+        MyClass.count += 1
+    
+z = MyClass()
+y = MyClass()
+x = MyClass()
+print(z.count)
+z.add()
+print(z.count)
+print(x.count)
+print(frac_two.count)
