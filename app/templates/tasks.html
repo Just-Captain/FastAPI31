@@ -8,10 +8,12 @@
 <body>
     
 Задачи: {% for task in tasks %}
-            {{task.title}}
-            {{task.description}}
+           <h3>{{task.title}}</h3> 
+            <h4>{{task.description}}</h4>
+            <hr>
         {% endfor %}
 
+<h1>Создать задачу</h1>
 <form id="taskForm" method="post">
     <label for="title">Название задачи</label>
     <input type="text" id="title" name="title">

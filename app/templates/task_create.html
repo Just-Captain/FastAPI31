@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form id="taskForm" method="post">
+    <label for="title">Название задачи</label>
+    <input type="text" id="title" name="title">
+    <label for="description">Описание задачи</label>
+    <input type="text" id="description" name="description">
+    <button id="btnTaskForm">Добавить задачу</button>
+</form>
+{% endblock %}
