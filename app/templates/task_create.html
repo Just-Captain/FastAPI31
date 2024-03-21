@@ -18,7 +18,7 @@
         let description = document.getElementById('description');
         const data = {"title": title.value, "description":description.value}
 
-        fetch('http://127.0.0.1:8000/tasks/', {
+        fetch('http://127.0.0.1:8000/tasks/create/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

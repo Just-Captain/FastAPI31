@@ -3,8 +3,7 @@
         {
             "id": 1,
             "title": "Создать проект",
-            "description": "Поднять проект на Fastapi",
-            "status": false
+            "description": "Поднять проект на Fastapi"
         }
     ],
     "count_action":{

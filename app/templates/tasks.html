@@ -6,6 +6,20 @@
            <h3>{{task.title}}</h3> 
             <h4>{{task.description}}</h4>
             <hr>
-
+            
             {% endfor %}
+<a href="/tasks/create">
+    <button type="button" class="btn btn-outline-dark">
+        Создать задачу
+    </button>
+</a>
+
+
+
+
+<script>
+let tasks = JSON.parse('{{tasks | tojson | safe}}')
+console.log(tasks)
+</script>
+
 {%endblock%}    
